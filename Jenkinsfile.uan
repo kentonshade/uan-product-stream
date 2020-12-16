@@ -1,0 +1,5 @@
+@Library('dst-shared@release/shasta-1.4') _
+ 
+blobletBuildPipeline {
+  name = "uan"
+}

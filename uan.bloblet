@@ -1,0 +1,15 @@
+# src dir:  http://dst.us.cray.com/dstrepo/uan/
+# dest dir: http://dst.us.cray.com/dstrepo/bloblets/uan/release/shasta-1.4/
+
+# sle15 cn rpms
+--rpm --exclude-dir-except 'sle15_cn/.*(?!src)(?!aarch64)/release/shasta-1.4'      --exclude-file-except '*.rpm' --exclude-file '.*crayctl.*.rpm|.*\.src\.rpm|.*\.aarch64\.rpm' --latest-dir rpms/cray-sles15-cn      --latest-subdir-subst 's/.+\/.+\.(.+)\.rpm/$1/;' --latest-trim --createrepo uan
+
+ # sle15sp1 ncn rpms
+--rpm --exclude-dir-except 'sle15_sp1_ncn/.*(?!src)(?!aarch64)/release/shasta-1.4' --exclude-file-except '*.rpm' --exclude-file '.*crayctl.*.rpm|.*\.src\.rpm|.*\.aarch64\.rpm' --latest-dir rpms/cray-sles15-sp1-ncn --latest-subdir-subst 's/.+\/.+\.(.+)\.rpm/$1/;' --latest-trim --createrepo uan
+
+# Docker Images
+--docker --exclude-dir-except 'release/shasta-1.4' --exclude-file-except '*dockerimage.tar' --latest-dir docker --latest-trim uan
+
+# Helm Charts
+--exclude-dir-except 'release/shasta-1.4/.*/helm' --exclude-file-except '*.tgz' --latest-dir helm --latest-trim uan
+
