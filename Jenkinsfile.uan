@@ -1,0 +1,5 @@
+@Library('dst-shared') _
+ 
+blobletBuildPipeline {
+  name = "uan"
+}
