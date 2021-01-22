@@ -1,12 +1,12 @@
-// Jenkinsfile to push uan-product-stream repo to github
+// Jenkinsfile to push cray-uan-product-stream repo to github
 // Copyright 2021 Hewlett Packard Enterprise Development LP
-
+ 
 @Library('dst-shared@master') _
 
 pipeline {
     agent {
         kubernetes {
-            label "uan-product-stream-push"
+            label "uan-product-stream-github-push"
             containerTemplate {
                 name "uan-product-stream-github-push-cont"
                 image "dtr.dev.cray.com/dst/cray-alpine3_build_environment:latest"
@@ -36,7 +36,7 @@ pipeline {
     stages {
         stage('Push to github') {
             when { allOf {
-                expression { BRANCH_NAME ==~ /(bugfix\/.*|feature\/.*|hotfix\/.*|master|main|release\/.*)/ }
+                expression { BRANCH_NAME ==~ /(bugfix\/.*|feature\/.*|hotfix\/.*|master|release\/.*)/ }
             }}
             steps {
                 container('uan-product-stream-github-push-cont') {
