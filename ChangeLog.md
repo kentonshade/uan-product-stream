@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- CASMUSER-2904: Add GPG key validation to uan_packages
 - CASM-2594: Update reference to CSM repo to use algol60
 - CASMUSER-2807: Add support for creating a UAN capable image with CFS only
 - CASMUSER-2789: Remove the UAN kiwi recipe and image
@@ -14,6 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CASMUSER-2843: Fix formatting error in uan_ldap role
 - CASMUSER-2780: Provide ability to get sensitive data from vault for uan_ldap role
 - CASM-2589: UAN: Limit access to management gateway by non-root users
+
+## [2.1.7] - 2021-10-28
+- CASMUSER-2624: Add kdump support for HPE DL UAN nodes
+
+## [2.1.6] - 2021-10-14
+- CASMUSER-2868: Add troubleshooting steps for CAN and SLS configuration
+- CASMUSER-2848: Add an example vars.yml showing how to enable the CAN
+- CASMUSER-2845: Fix goss test and script that checks UAN discovery
+- CASMUSER-2849: Remove ifmap from the BOS session template
 
 ## [2.1.5] - 2021-09-30
 - CASMUSER-2814: Doc updates
