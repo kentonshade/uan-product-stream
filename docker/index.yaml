@@ -1,4 +1,4 @@
-artifactory.algol60.net/uan-docker/stable:
+artifactory.algol60.net/uan-docker/unstable:
   tls-verify: true
   images:
     cray-uan-config:
