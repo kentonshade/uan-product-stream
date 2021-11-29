@@ -1,0 +1,38 @@
+# Copyright 2021 Hewlett Packard Enterprise Development LP
+command:
+  nexus_repo_exists_sp3:
+    title: Verify the appropriate nexus repo exists for the correct version for SP3
+    meta:
+      desc: Use the Nexus API to query for the correct repo
+      sev: 0
+    exec: "curl -sSk https://packages.local/service/rest/v1/repositories | jq -r \'.[] | select(.name == \"@name@-@major@.@minor@.@patch@-sle-15sp3\")\'"
+    exit-status: 0
+    timeout: 1000
+    skip: false
+  nexus_group_repo_exists_sp3:
+    title: Verify the appropriate nexus group repo exists for the correct version for SP3
+    meta:
+      desc: Use the Nexus API to query for the correct repo
+      sev: 0
+    exec: "curl -sSk https://packages.local/service/rest/v1/repositories | jq -r \'.[] | select(.name == \"@name@-@major@.@minor@-sle-15sp3\")\'"
+    exit-status: 0
+    timeout: 1000
+    skip: false
+  nexus_repo_exists_sp2:
+    title: Verify the appropriate nexus repo exists for the correct version for SP2
+    meta:
+      desc: Use the Nexus API to query for the correct repo
+      sev: 0
+    exec: "curl -sSk https://packages.local/service/rest/v1/repositories | jq -r \'.[] | select(.name == \"@name@-@major@.@minor@.@patch@-sle-15sp2\")\'"
+    exit-status: 0
+    timeout: 1000
+    skip: false
+  nexus_group_repo_exists_sp2:
+    title: Verify the appropriate nexus group repo exists for the correct version for SP2
+    meta:
+      desc: Use the Nexus API to query for the correct repo
+      sev: 0
+    exec: "curl -sSk https://packages.local/service/rest/v1/repositories | jq -r \'.[] | select(.name == \"@name@-@major@.@minor@-sle-15sp2\")\'"
+    exit-status: 0
+    timeout: 1000
+    skip: false

@@ -16,7 +16,17 @@ function copy_manifests {
 }
 
 function copy_tests {
-    rsync -aq "${ROOTDIR}/tests/" "${BUILDDIR}/tests/"
+    POST_INSTALL_CHECK=tests/goss/tests/goss-uan-post-install.yaml
+    rsync -aq --exclude "${ROOTDIR}/${POST_INSTALL_CHECK}" \
+        "${ROOTDIR}/tests/" "${BUILDDIR}/tests/"
+    sed -e "s/@major@/${MAJOR}/g
+            s/@minor@/${MINOR}/g
+            s/@patch@/${PATCH}/g
+            s/@name@/${NAME}/g" ${ROOTDIR}/${POST_INSTALL_CHECK}
+            > ${BUILDDIR}/${POST_INSTALL_CHECK}
+
+    cp "${ROOTDIR}/validate-pre-install.sh" "${BUILDDIR}/"
+    cp "${ROOTDIR}/validate-post-install.sh" "${BUILDDIR}/"
 }
 
 function copy_docs {
@@ -87,8 +97,6 @@ function sync_install_content {
             s/@patch@/${PATCH}/g" include/nexus-upload.sh > "${BUILDDIR}/lib/nexus-upload.sh"
 
     rsync -aq "${ROOTDIR}/install.sh" "${BUILDDIR}/"
-
-    rsync -aq "${ROOTDIR}/validate-pre-install.sh" "${BUILDDIR}/"
 }
 
 function package_distribution {
