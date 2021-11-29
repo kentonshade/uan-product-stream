@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- CASMUSER-2917: Fix rpm uploads to nexus and set major/minor/patch at build time
 - CASMUSER-2907: Remove online install support and doc references
 - CASM-2594: Update reference to CSM repo to use algol60
 - CASMUSER-2807: Add support for creating a UAN capable image with CFS only
