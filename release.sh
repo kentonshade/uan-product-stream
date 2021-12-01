@@ -17,13 +17,12 @@ function copy_manifests {
 
 function copy_tests {
     POST_INSTALL_CHECK=tests/goss/tests/goss-uan-post-install.yaml
-    rsync -aq --exclude "${ROOTDIR}/${POST_INSTALL_CHECK}" \
-        "${ROOTDIR}/tests/" "${BUILDDIR}/tests/"
+    cp "${ROOTDIR}/tests/" "${BUILDDIR}/tests/"
     sed -e "s/@major@/${MAJOR}/g
             s/@minor@/${MINOR}/g
             s/@patch@/${PATCH}/g
-            s/@name@/${NAME}/g" ${ROOTDIR}/${POST_INSTALL_CHECK}
-            > ${BUILDDIR}/${POST_INSTALL_CHECK}
+            s/@name@/${NAME}/g" ${ROOTDIR}/${POST_INSTALL_CHECK} \
+            ${BUILDDIR}/${POST_INSTALL_CHECK}
 
     cp "${ROOTDIR}/validate-pre-install.sh" "${BUILDDIR}/"
     cp "${ROOTDIR}/validate-post-install.sh" "${BUILDDIR}/"
