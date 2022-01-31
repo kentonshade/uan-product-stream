@@ -145,9 +145,9 @@ retrieved.
 
 ## Local Examples
 
-`https://stash.us.cray.com/projects/SHASTADOCS/repos/shasta-rest-site/browse`
+`https://github.hpe.com/hpe/hpc-shastadocs-shasta-rest-site`
 
-`https://stash.us.cray.com/projects/SSHOT/repos/slingshot_docs/browse`
+`https://github.hpe.com/hpe/hpc-sshot-slingshot_docs`
 
 ## More Reading
 
@@ -201,8 +201,8 @@ How many documents?  Names?  Does not have to be final/approved - just agree on 
 
 ## Pipeline creation of customer facing document(s)
 
-Yes, pipeline to produce html/pdf?  Or no pipeline - readers will rely on stash/github rendering of markdown.
-How many documents? 
+Yes, pipeline to produce html/pdf?  Or no pipeline - readers will rely on github rendering of markdown.
+How many documents?
 
 ## Create Outline for new docs repo 
 

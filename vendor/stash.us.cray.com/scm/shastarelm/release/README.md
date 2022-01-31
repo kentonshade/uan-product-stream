@@ -83,11 +83,11 @@ Installation via [Homebrew](https://brew.sh) is simply `brew install
 git-vendor`, then
 
 ```
-$ git vendor add release https://stash.us.cray.com/scm/shastarelm/release.git
+$ git vendor add release https://github.hpe.com/hpe/hpc-shastarelm-release.git
 ```
 
 This will create the directory
-`vendor/stash.us.cray.com/scm/shastarelm/release` and will track `master`
+`vendor/github.hpe.com/hpe/hpc-shastarelm-release` and will track `master`
 branch. Fetch updates via
 
 ```

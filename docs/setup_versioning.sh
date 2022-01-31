@@ -26,7 +26,6 @@
 # Do Not change versions in anyother place 
 
 CHANGE_LOG=changelog$$
-#PRODUCT_VERSION=$(curl https://stash.us.cray.com/projects/SSHOT/repos/slingshot-version/raw/slingshot-version?at=refs%2Fheads%2Fmaster)
 PRODUCT_VERSION=1.0.0
 date=`date '+%a %b %d %Y'` 
 git_hash=`git rev-parse HEAD`

@@ -90,7 +90,7 @@ function sync_repo_content {
 }
 
 function sync_install_content {
-    rsync -aq "${ROOTDIR}/vendor/stash.us.cray.com/scm/shastarelm/release/lib/install.sh" "${BUILDDIR}/lib/install.sh"
+    rsync -aq "${ROOTDIR}/vendor/github.hpe.com/hpe/hpc-shastarelm-release/lib/install.sh" "${BUILDDIR}/lib/install.sh"
 
     sed -e "s/@major@/${MAJOR}/g
             s/@minor@/${MINOR}/g
@@ -121,7 +121,7 @@ function package_distribution {
 # Definitions and sourced variables
 ROOTDIR="$(dirname "${BASH_SOURCE[0]}")"
 source "${ROOTDIR}/vars.sh"
-source "${ROOTDIR}/vendor/stash.us.cray.com/scm/shastarelm/release/lib/release.sh"
+source "${ROOTDIR}/vendor/github.hpe.com/hpe/hpc-shastarelm-release/lib/release.sh"
 requires rsync tar generate-nexus-config helm-sync skopeo-sync reposync vendor-install-deps sed realpath
 BUILDDIR="$(realpath -m "$ROOTDIR/dist/${NAME}-${VERSION}")"
 
