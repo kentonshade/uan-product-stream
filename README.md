@@ -34,7 +34,7 @@ attempting to build a release distribution.
 1. Ensure the documentation for the UAN is up-to-date in `docs/` for the
    artifacts that are referenced in the manifests.
 
-1. Run `git vendor update shastarelm-release` to update the shared libraries
+1. Run `git vendor update release` to update the shared libraries
 provided by the Shasta Release Management release tools.
 
 ### Generate a Release Distribution (local)
