@@ -1,5 +1,5 @@
 
-## Troubleshoot UAN CFS and Network Configuration Issues
+# Troubleshoot UAN CFS and Network Configuration Issues
 
 Examine the UAN CFS pod logs to help troubleshoot CFS and networking issues on UANs.
 
@@ -21,4 +21,4 @@ Read [About UAN Configuration](../operations/About_UAN_Configuration.md#about-ua
 
 3. **Optional:** Troubleshoot `uan_interfaces` issues by logging into the affected node \(usually with the conman console\) and using standard network debugging techniques.
 
-    NMN and CAN network setup errors can also result from incorrect switch configuration and network cabling.
+    NMN and CAN/CHN network setup errors can also result from incorrect switch configuration and network cabling.

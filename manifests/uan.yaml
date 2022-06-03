@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# (C) Copyright [2021] Hewlett Packard Enterprise Development LP
+# (C) Copyright 2021-2022 Hewlett Packard Enterprise Development LP
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -27,15 +27,9 @@ metadata:
 spec:
   charts:
   - name: cray-uan-install
-    version: 1.2.4
+    version: 1.8.1
     namespace: services
     values:
       cray-import-config:
-        catalog:
-          image:
-            tag: 1.2.62
-        config_image:
-          name: cray-uan-config
-          tag: 0.3.5
         import_job:
           CF_IMPORT_PRODUCT_VERSION: "@product_version@"

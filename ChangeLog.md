@@ -4,9 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-- Specify Application as a target group in CFS documentation
+## [2.4.1] - 2022-05-24
+- Increase short LDAP timeout
+- CHN fixes for compute nodes leveraging an IP in SLS
+- Include GPU changes from COS 2.3
+- Remove cray-diags-fabric from uan-packages
 
+## [2.4.0] - 2022-04-29
+- Change documentation to reflect streamlined selection of CAN/CHN
+- Change documentation to reflect uan_interfaces can configure compute default route
+- Change documentation to use sat bootprep
+- Updates to vendor directory for generating and installing releases
+
+## [2.3.2] - 2022-03-01
+- Updates to CFS plays for GPU fixes
+- Updates to CFS plays for DVS/Lustre/configure_fs fixes
+- Enable publishing of docs to HPE Support Center
+
+## [2.3.1] - 2022-02-15
+- Fix uan_packages to correctly check signatures
+- Updates CFS roles to ROCM 4.5.2
+- Updates CFS roles to AMD 21.40.2
+- Updates CFS roles to Nvidia SDK 21.9
+- Extra testing added to CFS plays
+- Specify Application as a target group in CFS documentation
 ## [2.3.0] - 2021-12-15
 - CASMUSER-2926: Add loki fixes for COS 2.2 and CSM artifacts
 - Simplify builds of CFS and pin to COS 2.2 CFS plays
