@@ -1,0 +1,18 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2022"><meta name="generator" content="DITA-OT"><title>Build a New UAN Image Using a COS Recipe</title><link rel="stylesheet" type="text/css" href="../css/commonltr.css"><link rel="stylesheet" type="text/css" href="../css/css_parent.css"></head><body id="build-a-new-uan-image-using-a-cos-recipe"><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="title topictitle1" id="ariaid-title1">Build a New UAN Image Using a COS Recipe</h1><div class="body"><p class="p">Prior to UAN 2.3, a similar copy of the COS recipe was imported with the UAN install. In the UAN 2.3 release, UAN does not install a recipe, and a COS recipe must be used. Additional uan packages will now be installed via CFS and the <code class="ph codeph">uan_packages</code> role.</p><p class="p">Perform the following before starting this procedure:</p><ul class="ul"><li class="li"><p class="p">Install the COS, Slingshot, and UAN product streams.</p></li><li class="li"><p class="p">Initialize the cray administrative CLI.</p></li></ul><p class="p">In the COS recipe for 2.2, several dependencies have been removed, this includes Slingshot, DVS, and Lustre. Those packages are now installed during CFS Image Customization. More information on this change is covered in the <a class="xref" href="Create_UAN_Boot_Images.html#create-boot-images">Create UAN Boot Images</a> procedure.</p><ol class="ol"><li class="li"><p class="p">Identify the COS image recipe to base the UAN image on. Select the recipe that matches the version of COS that the compute nodes will be using.</p><pre class="pre codeblock bash"><code>ncn-m001# cray ims recipes list --format json | jq '.[] | select(.name | contains("compute"))'
+{
+  "created": "2021-02-17T15:19:48.549383+00:00",
+  "id": "4a5d1178-80ad-4151-af1b-bbe1480958d1",  &lt;&lt;-- Note this ID
+  "link": {
+    "etag": "3c3b292364f7739da966c9cdae096964",
+    "path": "s3://ims/recipes/4a5d1178-80ad-4151-af1b-bbe1480958d1/recipe.tar.gz",
+    "type": "s3"
+  },
+  "linux_distribution": "sles15",
+  "name": "cray-shasta-compute-sles15sp3.x86_64-2.2.27",
+  "recipe_type": "kiwi-ng"
+}</code></pre></li><li class="li"><p class="p">Save the id of the IMS recipe in an environment variable.</p><pre class="pre codeblock bash"><code>ncn-m001# IMS_RECIPE_ID=4a5d1178-80ad-4151-af1b-bbe1480958d1</code></pre></li><li class="li"><p class="p">Use the IMS recipe id to build the UAN image:</p><p class="p">More detail on this IMS procedure may be found in the procedure "Build an Image Using IMS REST Service" in the CSM documentation.</p><pre class="pre codeblock bash"><code>ncn-m001# IMS_PUBLIC_KEY=$(cray ims public-keys list --format json | jq -r ".[] | .id" | head -1)
+ncn-m001# IMS_ARCHIVE_NAME=$(cray ims recipes describe $IMS_RECIPE_ID --format json | jq -r .name)
+ncn-m001# IMS_ARCHIVE_NAME=${IMS_ARCHIVE_NAME/compute/uan}
+ncn-m001# cray ims jobs create --job-type create --public-key-id $IMS_PUBLIC_KEY --image-root-archive-name $IMS_ARCHIVE_NAME --artifact-id $IMS_RECIPE_ID</code></pre></li><li class="li"><p class="p">Perform <a class="xref" href="Create_UAN_Boot_Images.html#create-boot-images">Create UAN Boot Images</a> to run CFS Image Customization on the resulting image.</p></li></ol></div><nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="../Manage_UAN_Boot_Images.html">Manage UAN Boot Images</a></div></div></nav></article></main></body></html>

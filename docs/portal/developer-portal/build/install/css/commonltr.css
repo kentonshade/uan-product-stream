@@ -1,0 +1,7 @@
+/*!
+
+this is a dummy file. I do not want the default styles to take place and there is not an elegant way of preventing the original commonltr.css from inserting link into head of html file.
+
+Since the HPE SC strips the head element, this should not be an issue.
+
+ */

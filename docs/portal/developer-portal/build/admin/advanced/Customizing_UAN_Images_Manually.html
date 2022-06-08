@@ -1,0 +1,13 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2022"><meta name="generator" content="DITA-OT"><title>Customizing UAN Images Manually</title><link rel="stylesheet" type="text/css" href="../css/commonltr.css"><link rel="stylesheet" type="text/css" href="../css/css_parent.css"></head><body id="customizing-uan-images-manually"><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="title topictitle1" id="ariaid-title1">Customizing UAN Images Manually</h1><div class="body"><ol class="ol"><li class="li"><p class="p">Query IMS for the UAN Image you want to customize.</p><pre class="pre codeblock bash"><code>ncn-m001:~/ $ cray ims images list --format json | jq '.[] | select(.name | contains("uan"))'
+{
+  "created": "2021-02-18T17:17:44.168655+00:00",
+  "id": "6d46d601-c41f-444d-8b49-c9a2a55d3c21",
+  "link": {
+    "etag": "371b62c9f0263e4c8c70c8602ccd5158",
+    "path": "s3://boot-images/6d46d601-c41f-444d-8b49-c9a2a55d3c21/manifest.json",
+    "type": "s3"
+  },
+  "name": "uan-PRODUCT_VERSION-image"
+}</code></pre></li><li class="li"><p class="p">Create a variable for the IMS image <code class="ph codeph">id</code> in the returned data.</p><pre class="pre codeblock bash"><code>ncn-m001:~/ $ export IMS_IMAGE_ID=6d46d601-c41f-444d-8b49-c9a2a55d3c21</code></pre></li><li class="li"><p class="p">Using the IMS_IMAGE_ID, follow the instructions in the <em class="ph i">Customize an Image Root Using IMS</em> in the CSM documentation to build the UAN Image.</p></li></ol></div><nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="../Advanced_Administrative_Tasks.html">Advanced Administrative Tasks</a></div></div></nav></article></main></body></html>

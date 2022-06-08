@@ -1,0 +1,29 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2022"><meta name="generator" content="DITA-OT"><title>Troubleshoot UAN Disk Configuration Issues</title><link rel="stylesheet" type="text/css" href="../css/commonltr.css"><link rel="stylesheet" type="text/css" href="../css/css_parent.css"></head><body id="troubleshoot-uan-disk-configuration-issues"><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="title topictitle1" id="ariaid-title1">Troubleshoot UAN Disk Configuration Issues</h1><div class="body"><p class="p">Perform this procedure to enable <code class="ph codeph">uan_disk_config</code> to run successfully by erasing existing disk partitions. UAN disk configuration will fail if the disk on the node is already partitioned. Manually erase any existing partitions to fix the issue.</p><p class="p">This procedure currently only addresses <code class="ph codeph">uan_disk_config</code> errors due to existing disk partitions.</p><p class="p">Refer to <a class="xref" href="../operations/About_UAN_Configuration.html#about-uan-configuration">About UAN Configuration</a> for an explanation of UAN disk configuration.</p><p class="p">The most common cause of failure in the <code class="ph codeph">uan_disk_config</code> role is the disk having been previously configured without a <code class="ph codeph">/scratch</code> and <code class="ph codeph">/swap</code> partition. Existing partitions prevent the <code class="ph codeph">parted</code> command from dividing the disk into those two equal partitions. The solution is to log into the node and run <code class="ph codeph">parted</code> manually to remove the existing partitions on that disk.</p><ol class="ol"><li class="li"><p class="p">Examine the CFS log and identify the failed disk device.</p></li><li class="li"><p class="p">Log into the affected UAN as root.</p></li><li class="li"><p class="p">Use parted to manually remove any existing partitions.</p><p class="p">The following example uses <code class="ph codeph">/dev/sdb</code> as the disk device. Also, as partitions are removed, the remaining partitions are renumbered. Therefore, <code class="ph codeph">rm 1</code> is issued twice to remove both partitions.</p><pre class="pre codeblock bash"><code>uan# parted
+GNU Parted 3.2
+Using /dev/sda
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) select /dev/sdb
+Using /dev/sdb
+(parted) print
+Model: ATA VK000480GWSRR (scsi)
+Disk /dev/sdb: 480GB
+Sector size (logical/physical): 512B/4096B
+Partition Table: msdos
+Disk Flags:
+
+Number  Start   End    Size   Type     File system  Flags
+ 1      1049kB  240GB  240GB  primary  ext4         type=83
+ 2      240GB   480GB  240GB  primary  ext4         type=83
+
+(parted) rm 1
+(parted) rm 1
+(parted) print
+Model: ATA VK000480GWSRR (scsi)
+Disk /dev/sdb: 480GB
+Sector size (logical/physical): 512B/4096B
+Partition Table: msdos
+Disk Flags:
+(parted) quit
+uan01:~ #</code></pre></li><li class="li"><p class="p">Either reboot the affected UAN or launch a CFS session against it to rerun the <code class="ph codeph">uan_disk_config</code> role.</p></li></ol></div><nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="../Troubleshooting.html">Troubleshooting</a></div></div></nav></article></main></body></html>
