@@ -24,7 +24,43 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      # Configure the required plugins not available in public repository
+      - name: Configure the HPE HTML5 Plugin
+        run: |
+          echo "Copy HTML5 zip file to current directory"
+          cp docs/portal/developer-portal/com.hpe.html5.common-master.zip .
+
+      # GHA: Need to install the HTML5 plugin below
+      # as well as any other required plugins
+      - name: Build HTML5 using DITA-OT
+        uses: dita-ot/dita-ot-action@master
+        with:
+            install: |
+              dita install com.hpe.html5.common-master.zip
+            input: docs/portal/developer-portal/uan_install.ditamap
+            transtype: html5
+            output-path: docs/portal/developer-portal/build
+
+      - name: Build HTML5 using DITA-OT
+        uses: dita-ot/dita-ot-action@master
+        with:
+            install: |
+              dita install com.hpe.html5.common-master.zip
+            input: docs/portal/developer-portal/uan_admin.ditamap
+            transtype: html5
+            output-path: docs/portal/developer-portal/build
+
+      # - uses: actions/setup-java@v3
+      #   with:
+      #     distribution: 'zulu' # See 'Supported distributions' for available options
+      #     java-version: '11'
+
+      # # Runs a single command using the runners shell
+      # - name: check docker version
+      #   run: |
+      #     docker --version
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
