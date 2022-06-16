@@ -34,7 +34,7 @@ jobs:
 
       # GHA: Need to install the HTML5 plugin below
       # as well as any other required plugins
-      - name: Build HTML5 using DITA-OT
+      - name: Build HTML5 using DITA-OT Install
         uses: dita-ot/dita-ot-action@master
         with:
             install: |
@@ -43,7 +43,7 @@ jobs:
             transtype: html5
             output-path: docs/portal/developer-portal/build
 
-      - name: Build HTML5 using DITA-OT
+      - name: Build HTML5 using DITA-OT Admin
         uses: dita-ot/dita-ot-action@master
         with:
             install: |
@@ -51,6 +51,12 @@ jobs:
             input: docs/portal/developer-portal/uan_admin.ditamap
             transtype: html5
             output-path: docs/portal/developer-portal/build
+
+      - name: Upload DITA
+        uses: actions/upload-artifact@v2
+        with:
+            name: dita-artifact
+            path: docs/portal/developer-portal/build # The folder the action should upload.
 
       # - uses: actions/setup-java@v3
       #   with:
