@@ -68,7 +68,6 @@ jobs:
             input: docs/portal/developer-portal/uan_admin.ditamap
             transtype: pdf
             output-path: docs/portal/developer-portal/build
-            output-path: docs/portal/developer-portal/build
 
       - name: Upload DITA
         uses: actions/upload-artifact@v2
