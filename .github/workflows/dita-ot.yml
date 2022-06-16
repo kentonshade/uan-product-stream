@@ -52,6 +52,24 @@ jobs:
             transtype: html5
             output-path: docs/portal/developer-portal/build
 
+      - name: Build PDF using DITA-OT Install
+        uses: dita-ot/dita-ot-action@master
+        with:
+            install: |
+              dita install com.hpe.html5.common-master.zip
+            input: docs/portal/developer-portal/uan_install.ditamap
+            transtype: pdf
+
+      - name: Build pdf using DITA-OT Admin
+        uses: dita-ot/dita-ot-action@master
+        with:
+            install: |
+              dita install com.hpe.html5.common-master.zip
+            input: docs/portal/developer-portal/uan_admin.ditamap
+            transtype: pdf
+            output-path: docs/portal/developer-portal/build
+            output-path: docs/portal/developer-portal/build
+
       - name: Upload DITA
         uses: actions/upload-artifact@v2
         with:
