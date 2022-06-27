@@ -69,6 +69,13 @@ jobs:
             transtype: pdf
             output-path: docs/portal/developer-portal/build
 
+      # Remove unnecessary zip files
+      # GHA Eventually we can make these values dynamic
+      - name: Remove unnecessary zip files
+        run: |
+          rm docs/portal/developer-portal/build/admin/*.zip
+          rm docs/portal/developer-portal/build/install/*.zip
+
       - name: Upload DITA
         uses: actions/upload-artifact@v2
         with:
