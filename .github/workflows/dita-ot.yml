@@ -74,7 +74,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt -y install libxml2-utils
-          xmllint --help
+          # xmllint --help
 
       # return value of pubsnumber
       - name: return value of pubsnumber
