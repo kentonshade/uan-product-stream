@@ -69,6 +69,18 @@ jobs:
             transtype: pdf
             output-path: docs/portal/developer-portal/build
 
+      # Add some required packages
+      - name: Add some required packages
+        run: |
+          sudo apt update
+          sudo apt -y install libxml2-utils
+          xmllint --help
+
+      # return value of pubsnumber
+      - name: return value of pubsnumber
+        run: |
+          xmllint --xpath 'string(/map/title/topicmeta/data/@value)' docs/portal/developer-portal/uan_admin.ditamap
+
       # Remove unnecessary zip files
       # GHA Eventually we can make these values dynamic
       - name: Remove unnecessary zip files
