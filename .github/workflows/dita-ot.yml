@@ -97,7 +97,7 @@ jobs:
       - name: Upload DITA
         uses: actions/upload-artifact@v2
         with:
-            name: dita-artifact
+            name: dita-artifact-${{ env.PUBSNUMBER }}
             path: docs/portal/developer-portal/build # The folder the action should upload.
 
       # - uses: actions/setup-java@v3
