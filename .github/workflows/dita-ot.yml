@@ -79,8 +79,13 @@ jobs:
       # return value of pubsnumber and assign to var
       - name: return value of pubsnumber and assign to var
         run: |
-          PUBSNUM=$(xmllint --xpath 'string(/map/topicmeta/data/@value)' docs/portal/developer-portal/uan_admin.ditamap)
-          echo "PUBSNUMBER="${PUBSNUM}"" >> $GITHUB_ENV
+          Edition=$(xmllint --xpath 'string(/map/topicmeta/data/data/@value)' docs/portal/developer-portal/uan_admin.ditamap)
+          Edition=$(echo "${Edition}" | grep -o  [[:digit:]].[[:digit:]].[[:digit:]])
+          pubsnumber=$(xmllint --xpath 'string(/map/topicmeta/data/@value)' docs/portal/developer-portal/uan_admin.ditamap)
+          doctitle=$(xmllint --xpath 'string(/map/title)' docs/portal/developer-portal/uan_admin.ditamap)
+          echo "EDITION="${Edition}"" >> $GITHUB_ENV
+          echo "PUBSNUMBER="${pubsnumber}"" >> $GITHUB_ENV
+          echo "DOCTITLE="${doctitle}"" >> $GITHUB_ENV
 
       # Check ENV variables
       - name: Check environmental variables
@@ -97,7 +102,7 @@ jobs:
       - name: Upload DITA
         uses: actions/upload-artifact@v2
         with:
-            name: dita-artifact-${{ env.PUBSNUMBER }}
+            name: dita-artifact-${{ env.EDITION }}
             path: docs/portal/developer-portal/build # The folder the action should upload.
 
       # - uses: actions/setup-java@v3
