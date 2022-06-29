@@ -79,11 +79,9 @@ jobs:
       # return value of pubsnumber and assign to var
       - name: return value of pubsnumber and assign to var
         run: |
-          Edition=$(xmllint --xpath 'string(/map/topicmeta/data/data/@value)' docs/portal/developer-portal/uan_admin.ditamap)
-          echo "Edition is equal to ${Edition}"
-          echo "Testing the grep command"
-          echo "${Edition}" | grep -o  [[:digit:]].[[:digit:]].[[:digit:]]
-          # Edition=$(echo "${Edition}" | grep -o  [[:digit:]].[[:digit:]].[[:digit:]])
+          dataValues=$(xmllint --xpath '/map/topicmeta/data/@value' docs/portal/developer-portal/uan_admin.ditamap)
+          echo "data tag values are equal to ${dataValues}"
+          Edition=$(echo ${dataValues} | grep -o  [[:digit:]].[[:digit:]].[[:digit:]])
           pubsnumber=$(xmllint --xpath 'string(/map/topicmeta/data/@value)' docs/portal/developer-portal/uan_admin.ditamap)
           doctitle=$(xmllint --xpath 'string(/map/title)' docs/portal/developer-portal/uan_admin.ditamap)
           echo "EDITION="${Edition}"" >> $GITHUB_ENV
