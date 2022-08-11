@@ -79,7 +79,7 @@ pipeline {
     agent {
         docker { image 'ditaot/dita-ot:latest' }
         // Can label go here?
-        label 'dstbuild'
+        // label 'dstbuild'
      }
 
     triggers { cron(cron_str) }
