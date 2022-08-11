@@ -76,11 +76,7 @@ String cron_str = BRANCH_NAME == "master" || BRANCH_NAME == "main" ? "0 7 * * 1"
 cron_str = BRANCH_NAME ==~ /^release\/.*/ ? "0 7 * * 1" : "${cron_str}"
 
 pipeline {
-    agent {
-        docker { image 'ditaot/dita-ot:latest' }
-        // Can label go here?
-        // label 'dstbuild'
-     }
+    agent { node { label 'dstbuild' } }
 
     triggers { cron(cron_str) }
 
@@ -169,7 +165,16 @@ pipeline {
                     }
             }
         }
-        stage('See if dita command is found') {
+        stage('DITA_OT') {
+            agent {
+                docker {
+                    image 'ditaot/dita-ot:latest'
+                    // Run the container on the node specified at the
+                    // top-level of the Pipeline, in the same workspace,
+                    // rather than on a new node entirely:
+                    reuseNode true
+                }
+            }
             steps {
                 sh "dita --version"
             }
