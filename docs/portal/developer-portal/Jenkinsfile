@@ -177,14 +177,17 @@ pipeline {
             }
             steps {
                 sh "dita --version"
+                sh """
+                    dita install --help
+                    """
             }
         }
-        // stage('Workdir Preparation') {
-        //     steps {
-        //         sh "mkdir -p build"
-        //         echo "image tag for this build is ${IMAGE_TAG}"
-        //     }
-        // }
+        stage('Testing if still in container') {
+            steps {
+                sh "dita --version"
+                sh "dita --help"
+            }
+        }
 
         // stage('Spellcheck') {
         //     steps {
