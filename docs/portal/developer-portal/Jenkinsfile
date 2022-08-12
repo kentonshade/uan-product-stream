@@ -180,14 +180,15 @@ pipeline {
                 sh """
                     dita install --help
                     """
+                sh "dita install com.hpe.html5.common-master.zip"
             }
         }
-        stage('Testing if still in container') {
-            steps {
-                sh "dita --version"
-                sh "dita --help"
-            }
-        }
+        // stage('Testing if still in container') {
+        //     steps {
+        //         sh "dita --version"
+        //         sh "dita --help"
+        //     }
+        // }
 
         // stage('Spellcheck') {
         //     steps {

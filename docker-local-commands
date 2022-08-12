@@ -1,0 +1,12 @@
+# Below runs the container with volumes per required repos
+sdc run \
+--privileged -d -t \
+--cap-add=SYS_ADMIN \
+--cap-add=NET_ADMIN \
+--env=DEBIAN_FRONTEND=noninteractive \
+--device=/dev/fuse \
+-v ~/repos/github/hpe/ks-uan-product-streams:/uan \
+--name dita-ot \
+--hostname dita-ot ditaot/dita-ot:latest /bin/bash && sd exec -it dita-ot /bin/bash
+
+sd exec -it dita-ot /bin/bash
