@@ -4,11 +4,11 @@ set -x
 
 # Return value of pubsnumber and assign to var
 echo "return value of pubsnumber and assign to var"
-dataValues=$(xmllint --xpath '/map/topicmeta/data/@value' docs/portal/developer-portal/uan_admin.ditamap)
+dataValues=$(xmllint --xpath '/map/topicmeta/data/@value' ../uan_admin.ditamap)
 echo "data tag values are equal to ${dataValues}"
 Edition=$(echo ${dataValues} | grep -o  [[:digit:]].[[:digit:]].[[:digit:]])
-pubsnumber=$(xmllint --xpath 'string(/map/topicmeta/data/@value)' docs/portal/developer-portal/uan_admin.ditamap)
-doctitle=$(xmllint --xpath 'string(/map/title)' docs/portal/developer-portal/uan_admin.ditamap)
+pubsnumber=$(xmllint --xpath 'string(/map/topicmeta/data/@value)' ../uan_admin.ditamap)
+doctitle=$(xmllint --xpath 'string(/map/title)' ../uan_admin.ditamap)
 export EDITION="${Edition}"
 export PUBSNUMBER="${pubsnumber}"
 export DOCTITLE="${doctitle}"
