@@ -76,7 +76,11 @@ String cron_str = BRANCH_NAME == "master" || BRANCH_NAME == "main" ? "0 7 * * 1"
 cron_str = BRANCH_NAME ==~ /^release\/.*/ ? "0 7 * * 1" : "${cron_str}"
 
 pipeline {
-    agent { node { label 'dstbuild' } }
+    agent {
+        dockerfile {
+          label 'dstbuild'
+        }
+      }
 
     triggers { cron(cron_str) }
 
@@ -166,29 +170,24 @@ pipeline {
             }
         }
         stage('DITA_OT') {
-            agent {
-                docker {
-                    image 'ditaot/dita-ot:latest'
-                    // Run the container on the node specified at the
-                    // top-level of the Pipeline, in the same workspace,
-                    // rather than on a new node entirely:
-                    reuseNode true
-                }
-            }
             steps {
                 sh "dita --version"
                 sh """
                     dita install --help
                     """
                 sh "dita install com.hpe.html5.common-master.zip"
+                script {
+                        echo "Print all Environment Variables"
+                        sh "env | sort -f"
+                    }
             }
         }
-        // stage('Testing if still in container') {
-        //     steps {
-        //         sh "dita --version"
-        //         sh "dita --help"
-        //     }
-        // }
+        stage('Testing if still in container') {
+            steps {
+                sh "dita --version"
+                sh "dita --help"
+            }
+        }
 
         // stage('Spellcheck') {
         //     steps {
