@@ -6,6 +6,7 @@ FROM ghcr.io/dita-ot/dita-ot:3.7.2
 RUN ls -la
 # RUN chmod +x ./entrypoint.sh
 # ENV PATH=$PATH:/home/dita-ot/DITA-OT/bin
+ENV DEBIAN_FRONTEND=noninteractive
 # RUN ./entrypoint.sh \
 #     ./image-os-info.sh
 
@@ -13,8 +14,8 @@ RUN ls -la
 USER root
 
 # Test apt commands
-RUN apt update \
-    apt -y install libxml2-utils git
+RUN apt update &&\
+    apt install -y libxml2-utils git
 
 # ENTRYPOINT ["./root/entrypoint.sh"]
 # Below is merely to allow the container to keep running for testing
