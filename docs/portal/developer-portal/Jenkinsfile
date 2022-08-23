@@ -172,11 +172,13 @@ pipeline {
         }
         stage('DITA_OT') {
             steps {
+                sh "pwd && ls -la"
+                sh "cp docs/portal/developer-portal/com.hpe.html5.common-master.zip ."
                 sh "dita --version"
                 sh """
                     dita install --help
                     """
-                sh "dita install com.hpe.html5.common-master.zip"
+                // sh "dita install com.hpe.html5.common-master.zip"
                 script {
                         echo "Print all Environment Variables"
                         sh "env | sort -f"
