@@ -78,6 +78,7 @@ cron_str = BRANCH_NAME ==~ /^release\/.*/ ? "0 7 * * 1" : "${cron_str}"
 pipeline {
     agent {
         dockerfile {
+          filename 'DITA-Dockerfile'
           label 'dstbuild'
         }
       }
