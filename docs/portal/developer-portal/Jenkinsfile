@@ -170,11 +170,11 @@ pipeline {
                     }
             }
         }
-        stage('DITA_OT') {
+        stage('DITA_OT - install html plugin') {
             steps {
                 sh "pwd && ls -la"
                 sh "cp docs/portal/developer-portal/com.hpe.html5.common-master.zip ."
-                sh "dita --version"
+                sh "dita install com.hpe.html5.common-master.zip"
                 sh """
                     dita install --help
                     """
@@ -185,10 +185,12 @@ pipeline {
                     }
             }
         }
-        stage('Testing if still in container') {
+        stage('Testing dita command to build output') {
             steps {
-                sh "dita --version"
-                sh "dita --help"
+                sh "cd docs/portal/developer-portal/"
+                sh "mkdir build"
+                sh "dita --input=uan_install.ditamap --format=html5 --output=./build"
+                sh "ls -la build/"
             }
         }
 
