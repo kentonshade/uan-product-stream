@@ -187,16 +187,16 @@ pipeline {
         }
         stage('Testing dita command to build output') {
             steps {
-                sh "mkdir build"
-                sh "dita --input=${WORKSPACE}/docs/portal/developer-portal/uan_install.ditamap --format=html5 --output=${WORKSPACE}/docs/portal/developer-portal/build"
-                sh "ls -la build/"
+                sh "pwd"
+                sh "mkdir -p docs/portal/developer-portal/build"
+                sh "dita --input=./docs/portal/developer-portal/uan_install.ditamap --format=html5 --output=./docs/portal/developer-portal/build"
+                sh "ls -la ./docs/portal/developer-portal/build/"
             }
         }
         stage('Testing dita command to build output - admin') {
             steps {
-                sh "mkdir build"
-                sh "dita --input=${WORKSPACE}/docs/portal/developer-portal/uan_admin.ditamap --format=html5 --output=${WORKSPACE}/docs/portal/developer-portal/build"
-                sh "ls -la build/"
+                sh "dita --input=./docs/portal/developer-portal/uan_admin.ditamap --format=html5 --output=./docs/portal/developer-portal/build"
+                sh "ls -la ./docs/portal/developer-portal/build/"
             }
         }
 
