@@ -24,9 +24,9 @@ def pipelineParams= [
     makeMakefile: "hpc-shastadocs-docs-as-code/portal/developer-portal/Makefile",
     dockerfileSpell: "hpc-shastadocs-docs-as-code/Dockerfile.spellcheck",
     repository: "cray",
-    imagePrefix: "project-docs",
-    name: "project-docs",
-    description: "Docs-as-code template",
+    imagePrefix: "uan-docs",
+    name: "uan-docs",
+    description: "DITA-OT",
     masterBranch: 'master',
     dockerBuildContextDir: '.',
     dockerArguments: "",
@@ -208,30 +208,23 @@ pipeline {
         //     }
         // }
 
-        // stage('Build PDF HTML') {
-        //     environment {
-        //         BUILD_DATE = "${buildDate}"
-        //     }
-        //     steps {
-        //     // Build PDF HTML
-        //     echo "${BUILD_DATE}"
-        //     sh """
-        //         if [[ -f ${pipelineParams.makeMakefile} ]]; then
-        //             mkdir -p ${WORKSPACE}/build/results
-        //             cd hpc-shastadocs-docs-as-code/portal/developer-portal;make tar
-        //             cp build/*.tar ${WORKSPACE}/build/results/${IMAGE_NAME_PDFHTML}.tar
-        //             mkdir -p ${WORKSPACE}/build/results/${PRODUCT_NAME}
-        //             mv ${WORKSPACE}/build/results/${IMAGE_NAME_PDFHTML}.tar ${WORKSPACE}/build/results/${PRODUCT_NAME}/${IMAGE_NAME_PDFHTML}.tar
-        //             cp build/pdf ${WORKSPACE}/build/results/${IMAGE_NAME_PDF} -rf
-        //             cp build/html ${WORKSPACE}/build/results/${IMAGE_NAME_HTML} -rf
-        //         else
-        //             echo "${pipelineParams.makeMakefile} doesn't exist"
-        //             exit 1
-        //         fi
-        //         """
-
-        //     }
-        // }
+        stage('Preparing assets for artifactory') {
+            // environment {
+            //     BUILD_DATE = "${buildDate}"
+            // }
+            steps {
+            // Build PDF HTML
+            // echo "${BUILD_DATE}"
+            sh """
+                    pwd
+                    mkdir -p ${WORKSPACE}/build/results
+                    cp ./docs/portal/developer-portal/build/* ${WORKSPACE}/build/results/
+                    mkdir -p ${WORKSPACE}/build/results/dita-ot-uan
+                    mv ${WORKSPACE}/build/results ${WORKSPACE}/build/results/dita-ot-uan
+                    ls -la ${WORKSPACE}/build/results/dita-ot-uan
+                """
+            }
+        }
 
         /*
         stage('Create RPM') {
