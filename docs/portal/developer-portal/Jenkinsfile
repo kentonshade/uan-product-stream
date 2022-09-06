@@ -219,6 +219,7 @@ pipeline {
                     pwd
                     mkdir -p ${WORKSPACE}/build/results/dita-ot-uan
                     cp -R ./docs/portal/developer-portal/build/* ${WORKSPACE}/build/results/dita-ot-uan
+                    tar -cf ${WORKSPACE}/build/results/dita-ot-uan/dita-ot-uan.tar ${WORKSPACE}/build/results/dita-ot-uan
                     ls -la ${WORKSPACE}/build/results/dita-ot-uan
                 """
             }
