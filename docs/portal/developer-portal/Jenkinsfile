@@ -247,18 +247,18 @@ pipeline {
             }
         }
         */
-        // stage('Transfer') {
-        //     steps {
-        //         script {
-        //             if ( checkFileExists(filePath: "build/results/${PRODUCT_NAME}/*.tar") ) {
-        //                 transfer(artifactName: "build/results/${PRODUCT_NAME}")
-        //             }
-        //             if ( checkFileExists(filePath: 'build/results/*.rpm') ) {
-        //                 transfer(artifactName: "build/results/*.rpm")
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Transfer') {
+            steps {
+                script {
+                    if ( checkFileExists(filePath: "build/results/dita-ot-uan/*.tar") ) {
+                        transfer(artifactName: "build/results/dita-ot-uan/*.tar")
+                    }
+                    if ( checkFileExists(filePath: 'build/results/*.rpm') ) {
+                        transfer(artifactName: "build/results/*.rpm")
+                    }
+                }
+            }
+        }
     }
     post('Post-build steps') {
         always {
