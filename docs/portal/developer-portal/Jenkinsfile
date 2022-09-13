@@ -80,6 +80,7 @@ pipeline {
         dockerfile {
           filename 'DITA-Dockerfile'
           label 'dstbuild'
+          reuseNode true
         }
       }
 
