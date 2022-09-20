@@ -17,6 +17,9 @@ USER root
 RUN apt update &&\
     apt install -y libxml2-utils git
 
+# Troubleshooting transfer issues
+RUN chsh -s /bin/bash
+
 # ENTRYPOINT ["./root/entrypoint.sh"]
 # Below is merely to allow the container to keep running for testing
 # Method 1
