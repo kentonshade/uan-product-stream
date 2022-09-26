@@ -141,28 +141,28 @@ pipeline {
         stage("Env Variables and Versioning") {
             environment {
                 CINAME = "Jenkins"
-                HPE_GITHUB_TOKEN = credentials('ghe_jenkins_token')
+                // HPE_GITHUB_TOKEN = credentials('ghe_jenkins_token')
             }
 
-            // steps {
-            //     script {
-            //         // env.VERSION = "${PRODUCT_VERSION}"
-            //         // env.VERSION_RPM = "${VERSION}"
-            //         // env.GIT_TAG = sh(returnStdout: true, script: "git rev-parse --short HEAD").trim()
-            //         // env.BUILD_DATE = "${buildDate}"
-            //         // env.IMAGE_TAG = getDockerImageTag(version: "${VERSION}", buildDate: "${BUILD_DATE}", gitTag: "${GIT_TAG}")
-            //         // // Set project specific naming
-            //         // env.IMAGE_PREFIX = "${PRODUCT_LABEL}"
-            //         // env.PRODUCT_NAME = "${PRODUCT_LABEL}"
-            //         // env.IMAGE_NAME_PDFHTML = "${IMAGE_PREFIX}-pdfhtml-${IMAGE_TAG}"
-            //         // env.IMAGE_NAME_PDF = "${IMAGE_PREFIX}-pdf-${IMAGE_TAG}"
-            //         // env.IMAGE_NAME_HTML = "${IMAGE_PREFIX}-html-${IMAGE_TAG}"
-            //         // env.PRODUCT = "pubs"
-            //         // env.TARGET_OS = "noos"
-            //         // env.TARGET_ARCH = "noarch"
-            //         // env.HPE_GITHUB_TOKEN = credentials('ghe_jenkins_token')
-            //     }
-            // }
+            steps {
+                script {
+                    // env.VERSION = "${PRODUCT_VERSION}"
+                    // env.VERSION_RPM = "${VERSION}"
+                    // env.GIT_TAG = sh(returnStdout: true, script: "git rev-parse --short HEAD").trim()
+                    // env.BUILD_DATE = "${buildDate}"
+                    // env.IMAGE_TAG = getDockerImageTag(version: "${VERSION}", buildDate: "${BUILD_DATE}", gitTag: "${GIT_TAG}")
+                    // // Set project specific naming
+                    // env.IMAGE_PREFIX = "${PRODUCT_LABEL}"
+                    // env.PRODUCT_NAME = "${PRODUCT_LABEL}"
+                    // env.IMAGE_NAME_PDFHTML = "${IMAGE_PREFIX}-pdfhtml-${IMAGE_TAG}"
+                    // env.IMAGE_NAME_PDF = "${IMAGE_PREFIX}-pdf-${IMAGE_TAG}"
+                    // env.IMAGE_NAME_HTML = "${IMAGE_PREFIX}-html-${IMAGE_TAG}"
+                    // env.PRODUCT = "pubs"
+                    // env.TARGET_OS = "noos"
+                    // env.TARGET_ARCH = "noarch"
+                    env.HPE_GITHUB_TOKEN = credentials('ghe_jenkins_token')
+                }
+            }
         }
         stage('Print Build Info') {
             steps {
