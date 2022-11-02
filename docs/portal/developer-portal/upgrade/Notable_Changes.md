@@ -34,3 +34,23 @@ When an upgrade is being performed, please review the notable changes for **all*
     * Fully configured HSN
     * SLS has IP assignments for compute nodes on hsn0
 * Updates to GPU roles to match COS 2.3
+
+## UAN 2.4.2
+
+* There is a known issue with the version of GPU support included in the UAN CFS repo. The result is that both AMD and Nvidia SDKs are not able to be projected at the same time. Until this is resolved in a later release, modify the site.yml in the UAN CFS repo to only include either amd or nvidia.
+
+## UAN 2.4.3
+
+* A new CFS role, `uan_hardening` adds iptables rules that will block SSH traffic to NCNs. See the README.md in the uan_hardening role for more information.
+
+## UAN 2.5.3
+
+* A technical preview of a standard SLES image for UAN/Application nodes is included.
+* Support SLES15SP4 COS based images
+
+## UAN 2.6.0
+
+* UAN CFS configurations now require a CSM and two COS layers. Roles that were duplicated from COS CFS in the UAN CFS repo have been removed.
+  * Values for COS CFS roles that were previously set in the UAN CFS group_vars directory should now be set in COS CFS group_vars
+* UAN CFS has been restructured to work for COS and Standard SLES images
+* uan_packages variables are now vars/uan_packages.yml and vars/uan_repos.yml and have been renamed. Admins will need to migrate to the new settings.

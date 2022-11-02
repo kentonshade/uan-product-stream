@@ -39,7 +39,7 @@ Replace `PRODUCT_VERSION` and `CRAY_EX_HOSTNAME` in the example commands in this
 2. **Optional** Generate the password hash for the `root` user. Replace PASSWORD with the `root` password you wish to use.  If an upgrade or image rebuild is being performed, the root password may have already been added to vault.
 
     ```bash
-    ncn-m001# openssl passwd -6 -salt $(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c4) PASSWORD
+    ncn-m001# openssl passwd -6 -salt $(< /dev/urandom tr -dc ./A-Za-z0-9 | head -c4) PASSWORD
     ```
 
 3. **Optional** Obtain the HashiCorp Vault `root` token.
@@ -53,7 +53,7 @@ Replace `PRODUCT_VERSION` and `CRAY_EX_HOSTNAME` in the example commands in this
     The vault login command will request a token. That token value is the output of the previous step. The vault `read secret/uan` command verifies that the hash was stored correctly. This password hash will be written to the UAN for the `root` user by CFS.
 
     ```bash
-    ncn-m001# kubectl exec -it -n vault cray-vault-0 -- sh
+    ncn-m001# kubectl exec -it -n vault cray-vault-0 -c vault -- sh
     export VAULT_ADDR=http://cray-vault:8200
     vault login
     vault write secret/uan root_password='HASH'
@@ -161,24 +161,48 @@ The SAT bootprep input file should have a configuration section that specifies e
 
 Note that the Slingshot Host Software CFS layer is listed first. This is required as the UAN layer will attempt to install DVS and Lustre packages that require SHS be installed first. The correct playbook for Cassini or Mellanox must also be specified. Consult the Slingshot Host Software documentation for more information.
 
+Beginning with UAN version `2.6.0`, CFS configuration roles which are provided by COS are now defined as two separate COS configuration layers as shown in the example below.  Prior to UAN version `2.6.0`, these roles were included in the UAN configuration layer.  Separating these roles into COS layers allows COS updates to be independent from UAN updates.
+
 ```yaml
 configurations:
 - name: uan-config
   layers:
-  - name: slingshot-host-software
+  - name: shs-mellanox_install-integration
     playbook: shs_mellanox_install.yml
     product:
       name: slingshot-host-software
       version: 2.0.0
       branch: integration
-
-  ... add configuration layers for other products here, if desired ...
-
+#  - name: shs-cassini_install-integration
+#    playbook: shs_cassini_install.yml
+#    product:
+#      name: slingshot-host-software
+#      version: 2.0.0
+#      branch: integration
+  - name: cos-application-integration
+    playbook: cos-application.yml
+    product:
+      name: cos
+      version: 2.5
+  - name: csm-packages-integration
+    playbook: csm_packages.yml
+    product:
+      name: csm
+      version: 1.4
   - name: uan
     playbook: site.yml
     product:
       name: uan
-      version: 2.4.0
+      version: 2.6.0
+      branch: integration
+  
+  ... add configuration layers for other products here, if desired ...
+
+  - name: uan-rebuild-initrd
+    playbook: rebuild-initrd.yml
+    product:
+      name: uan
+      version: 2.6.0
       branch: integration
 ```
 

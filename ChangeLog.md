@@ -4,6 +4,51 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+- Restructure UAN CFS and remove COS CFS roles
+- Update Application image to 0.2.1
+- Enable install.sh to work on GCP vshastav2
+- Add support for unified docs project - docs-product-manifest.yaml
+- Update documentation for new COS CFS layers
+
+## [2.5.6] - 2022-10-14
+- Fix issue configuring CHN on computes nodes after COS 2.4.79 enabled cray-ifconf
+
+## [2.5.5] - 2022-10-05
+- Disable cray-ifconf
+- Fix edge case in uan_interfaces
+
+## [2.5.4] - 2022-09-07
+- Update UAN with the latest COS CFS changes
+- Use a new cf-gitea-import
+
+## [2.5.3] - 2022-08-26
+- Update uan_interfaces role to optimize SLS queries
+- Update cray-application to 0.1.0 for new packages and build pipeline
+- Add docs for SLES Image booting
+
+## [2.5.2] - 2022-08-11
+- Update vendored product /hpe/hpc-shastarealm-release
+- Create UAN artifacts based on COS 2.4
+
+## [2.5.1] - 2022-08-09
+- Add new sles image cray-application-sles15sp3.x86_64-0.0.1
+- Add documentation for repurposing compute nodes as UANs
+
+## [2.5.0] - 2022-07-29
+- Add support for uan_hardening role on computes
+- Add SP4 repos
+
+## [2.4.3] - 2022-06-24
+- Add routing to CHN and CAN MetalLB
+- Prevent loss of existing routes
+- Add new uan_hardening role to block SSH traffic to NCNs
+
+## [2.4.2] - 2022-06-06
+- Reverse the order of CHN Gateway conditions to avoid undefined references in ansible
+- Add where clause to Mountain NMN gateway play to avoid undefined reference on non-Mountain systems
+- Update zypper repo to UAN-2.4 version
+
 ## [2.4.1] - 2022-05-24
 - Increase short LDAP timeout
 - CHN fixes for compute nodes leveraging an IP in SLS
